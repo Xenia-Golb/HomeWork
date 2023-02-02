@@ -1,20 +1,20 @@
-﻿// Задача 10: Напишите программу, которая принимает на вход трёхзначное число и на выходе показывает вторую цифру этого числа.
-// 456 -> 5 782 -> 8 918 -> 1
+﻿// Задача 13: Напишите программу, которая выводит третью цифру заданного числа или сообщает, что третьей цифры нет.
+// 645 -> 5
+// 78 -> третьей цифры нет
+// 32679 -> 6
 Console.Clear();
 Console.Write("Введите число  ");
 int number = int.Parse(Console.ReadLine()!);
-int number1 = number / 10;
-while (number > 999)
+if (number > 99)
 {
-    number = number / 10;
+    while ( number> 999)
+    {
+        number = (number/10);
+    }
+int result = number % 10;
+Console.WriteLine (result);
 }
-int count = 10;
-int result = number1 % count;
-if (number < 99)
+else 
 {
-    Console.WriteLine("Это не трехзначное число!");
-}
-else
-{
-    Console.WriteLine($"{result}");
+    Console.WriteLine ("Тетьей цифры нет");
 }
