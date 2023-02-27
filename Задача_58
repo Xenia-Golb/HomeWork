@@ -1,0 +1,60 @@
+int[,] GetMatrix(int m, int n, int minValue, int maxValue)
+{
+    int[,] matrix = new int[m, n];
+
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            matrix[i, j] = new Random().Next(minValue, maxValue + 1);
+        }
+    }
+
+    return matrix;
+}
+void PrintMatrix(int[,] matrix)
+{
+    for (int i = 0; i < matrix.GetLength(0); i++)
+    {
+        for (int j = 0; j < matrix.GetLength(1); j++)
+        {
+            Console.Write($"{matrix[i, j]}\t ");
+        }
+        Console.WriteLine();
+    }
+}
+int[,] MultMatrix (int[,] MatrixA, int[,]MatrixB)
+{
+    int[,]MatrixC = new int [MatrixA.GetLength(0), MatrixB.GetLength(1)];
+    if(MatrixA.GetLength(1)!= MatrixB.GetLength(0))
+    {
+        Console.WriteLine("Невозможно умножить матрицы");
+        return MatrixC;
+    }
+    for (int i = 0; i < MatrixC.GetLength(0); i++)
+    {
+        for (int j = 0; j < MatrixC.GetLength(1); j++)
+        {
+            for (int k = 0; k < MatrixA.GetLength(1); k++)
+            {
+                MatrixC[i,j] += MatrixA[i,k] * MatrixB [k,j];
+            }
+        }
+    }
+    return MatrixC;
+}
+Console.Clear();
+Console.Write("Введите размерность Maтрицы А через запятую: ");
+int[]sizeA = Array.ConvertAll(Console.ReadLine().Split(','), Convert.ToInt32);
+int[,] MatrixA = GetMatrix(sizeA[0],sizeA[1], -9,9);
+Console.Write("Введите размерность Maтрицы B через запятую: ");
+int[]sizeB = Array.ConvertAll(Console.ReadLine().Split(','), Convert.ToInt32);
+int[,] MatrixB = GetMatrix(sizeB[0],sizeB[1], -9,9);
+
+PrintMatrix(MatrixA);
+Console.WriteLine();
+PrintMatrix(MatrixB);
+
+int[,] MatrixC = MultMatrix(MatrixA,MatrixB);
+Console.WriteLine();
+PrintMatrix(MatrixC);
